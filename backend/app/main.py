@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from app.engine.random_bot import choose_move
+from app.engine.minimax_bot import choose_move
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
