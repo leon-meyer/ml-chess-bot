@@ -1,7 +1,13 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from engine.minimax_bot import choose_move
 from fastapi.middleware.cors import CORSMiddleware
+from routes import router
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
+logger = logging.getLogger("ml_chess_bot")
 
 app = FastAPI()
 
@@ -12,13 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class BoardRequest(BaseModel):
-    fen: str
+app.include_router(router)
 
-@app.post("/move")
-
-def get_move(data: BoardRequest):
-    move = choose_move(data.fen)
-    if move is None:
-        return {"move": None}
-    return {"move": move}
+logger.info("FastAPI app initialized (logging enabled)")
