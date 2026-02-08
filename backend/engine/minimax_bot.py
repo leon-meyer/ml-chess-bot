@@ -1,5 +1,5 @@
 import chess
-from ..evaluate_board import evaluate_board
+from evaluate_board import evaluate_board
 
 def choose_move(fen: str):
     board = chess.Board(fen)
