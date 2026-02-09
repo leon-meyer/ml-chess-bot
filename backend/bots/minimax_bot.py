@@ -2,7 +2,6 @@ import chess
 from evaluate_board import evaluate_board
 
 def choose_move(board: chess.Board):
-
     legal_moves = list(board.legal_moves)
     if len(legal_moves) == 0:
         return None
