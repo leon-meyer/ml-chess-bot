@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from bots.minimax_bot import choose_move as minimax_choose_move
+from bots.minimax_prune_bot import choose_move as minimax_prune_choose_move
 from bots.random_bot import choose_move as random_choose_move
 from game_manager import GameManager
 from models.player_types import PlayerType
@@ -43,6 +44,8 @@ def get_move(request: BotMoveRequest):
 
     if current_player_config == PlayerType.MINIMAX_BOT:
         move = minimax_choose_move(board)
+    if current_player_config == PlayerType.MINIMAX_PRUNE_BOT:
+        move = minimax_prune_choose_move(board)
     elif current_player_config == PlayerType.RANDOM_BOT:
         move = random_choose_move(board)
     else:
